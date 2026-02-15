@@ -22,14 +22,16 @@ Designed for infrastructure automation, dynamic gateway configuration, and platf
 
 ## Installation
 
+This library requires `@nestjs/axios` to communicate with the APISIX Admin API.
+
 ```bash
-npm install @nestjstools/apisix-client 
+npm install @nestjstools/apisix-client @nestjs/axios
 ```
 
 or
 
 ```bash
-yarn add @nestjstools/apisix-client
+yarn add @nestjstools/apisix-client @nestjs/axios
 ```
 
 ---
@@ -64,7 +66,7 @@ export class AppModule {
 ### Inject Client
 ```typescript
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { ApisixClient } from '@nestjstools/apisix-client';
+import { ApisixClient, ApisixRouteRequest } from '@nestjstools/apisix-client';
 
 @Injectable()
 export class GatewaySyncService implements OnModuleInit {
@@ -87,7 +89,7 @@ export class GatewaySyncService implements OnModuleInit {
           'host.docker.internal:3000': 1,
         },
       },
-    };
+    } as ApisixRouteRequest;
 
     try {
       await this.apisix.route().upsertRoute(routeId, desiredRoute);
