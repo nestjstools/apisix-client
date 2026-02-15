@@ -13,7 +13,7 @@ export class ApisixClient {
     return this.consumerScope;
   }
 
-  route(): RouteScope {
+  route(): RourteScope {
     return this.routeScope;
   }
 }

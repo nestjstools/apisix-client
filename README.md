@@ -90,13 +90,10 @@ export class GatewaySyncService implements OnModuleInit {
     };
 
     try {
-      // If exists → update
-      await this.apisix.routes.update(routeId, desiredRoute);
+      await this.apisix.route().upsertRoute(routeId, desiredRoute);
       console.log('APISIX route updated');
     } catch (err) {
-      // If not exists → create
-      await this.apisix.routes.create(desiredRoute);
-      console.log('APISIX route created');
+      console.log(err);
     }
   }
 }
