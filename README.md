@@ -116,10 +116,6 @@ export class GatewaySyncService implements OnModuleInit {
 
 This library supports most of the commonly used Apache APISIX plugins, including authentication, traffic control, transformation, and security plugins.
 
-Nice 💪 good addition — that increases trust immediately.
-
-Here’s a clean footer section you can add to your README.
-
 ---
 
 ## 🧪 Tests
