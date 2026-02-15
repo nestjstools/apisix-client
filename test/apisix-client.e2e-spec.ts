@@ -18,7 +18,7 @@ describe('ApisixClient', () => {
     const module = await Test.createTestingModule({
       imports: [
         ApisixClientModule.forRoot({
-          url: 'http://localhost:9180',
+          url: 'http://localhost',
           adminSecret: '123',
         }),
       ],
