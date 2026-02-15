@@ -1,5 +1,5 @@
 {
-  "name": "@nestjstools/apache-apisix-client",
+  "name": "@nestjstools/apisix-client",
   "version": "1.0.0",
   "description": "A lightweight, type-safe NestJS client for managing Apache APISIX via the Admin API",
   "author": "Sebastian Iwanczyszyn",
