@@ -1,9 +1,14 @@
 import {
-  AuthzKeycloakRoutePlugin, BasicAuthConsumerPlugin,
-  BasicAuthRoutePlugin, JweDecryptConsumerPlugin,
-  JweDecryptRoutePlugin, JwtAuthConsumerPlugin,
-  JwtAuthRoutePlugin, KeyAuthConsumerPlugin,
-  KeyAuthRoutePlugin, OpenIdConnectRoutePlugin,
+  AuthzKeycloakRoutePlugin,
+  BasicAuthConsumerPlugin,
+  BasicAuthRoutePlugin,
+  JweDecryptConsumerPlugin,
+  JweDecryptRoutePlugin,
+  JwtAuthConsumerPlugin,
+  JwtAuthRoutePlugin,
+  KeyAuthConsumerPlugin,
+  KeyAuthRoutePlugin,
+  OpenIdConnectRoutePlugin,
 } from './authentication';
 import {
   AttachConsumerLabelRoutePlugin,
@@ -11,7 +16,8 @@ import {
   DeGraphQLRoutePlugin,
   FaultInjectionRoutePlugin,
   GrpcTranscodeRoutePlugin,
-  GrpcWebRoutePlugin, MockingRoutePlugin,
+  GrpcWebRoutePlugin,
+  MockingRoutePlugin,
   ProxyRewriteRoutePlugin,
   ResponseRewriteRoutePlugin,
 } from './transformation';
@@ -30,19 +36,19 @@ export type ApisixRoutePlugins = {
   'grpc-transcode'?: GrpcTranscodeRoutePlugin;
   'grpc-web'?: GrpcWebRoutePlugin;
   'fault-injection'?: FaultInjectionRoutePlugin;
-  'mocking'?: MockingRoutePlugin;
-  'degraphql'?: DeGraphQLRoutePlugin;
+  mocking?: MockingRoutePlugin;
+  degraphql?: DeGraphQLRoutePlugin;
   'body-transformer'?: BodyTransformerRoutePlugin;
   'attach-consumer-label'?: AttachConsumerLabelRoutePlugin;
-  'cors'?: CorsRoutePlugin;
+  cors?: CorsRoutePlugin;
   'ip-restriction'?: IpRestrictionRoutePlugin;
-  'redirect'?: RedirectRoutePlugin;
-  'echo'?: EchoRoutePlugin;
-}
+  redirect?: RedirectRoutePlugin;
+  echo?: EchoRoutePlugin;
+};
 
 export type ApisixConsumerPlugins = {
   'jwt-auth'?: JwtAuthConsumerPlugin;
   'key-auth'?: KeyAuthConsumerPlugin;
   'jwe-decrypt'?: JweDecryptConsumerPlugin;
   'basic-auth'?: BasicAuthConsumerPlugin;
-}
+};

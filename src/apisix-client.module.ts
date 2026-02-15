@@ -18,13 +18,15 @@ export class ApisixClientModule {
     return {
       global: config.global ?? true,
       module: ApisixClientModule,
-      imports: [HttpModule.register({
-        baseURL: `${config.url}/${prefix}/admin`,
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': config.adminSecret,
-        },
-      })],
+      imports: [
+        HttpModule.register({
+          baseURL: `${config.url}/${prefix}/admin`,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-API-KEY': config.adminSecret,
+          },
+        }),
+      ],
       providers: [
         ApisixClient,
         ConsumerScope,

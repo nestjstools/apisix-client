@@ -11,12 +11,20 @@ export class ConsumerScope extends Scope {
     super(http, `consumers`);
   }
 
-  async getConsumer<T extends ApisixConsumerPlugins>(username: string): Promise<ApisixResponse<T>> {
+  async getConsumer<T extends ApisixConsumerPlugins>(
+    username: string,
+  ): Promise<ApisixResponse<T>> {
     return this.request('get', `/${encodeURIComponent(username)}`);
   }
 
-  async upsertConsumer<T extends ApisixConsumerPlugins>(payload: ApisixConsumerRequest): Promise<ApisixResponse<T>> {
-    return this.request('put', `/${encodeURIComponent(payload.username)}`, payload);
+  async upsertConsumer<T extends ApisixConsumerPlugins>(
+    payload: ApisixConsumerRequest,
+  ): Promise<ApisixResponse<T>> {
+    return this.request(
+      'put',
+      `/${encodeURIComponent(payload.username)}`,
+      payload,
+    );
   }
 
   async deleteConsumer(username: string) {

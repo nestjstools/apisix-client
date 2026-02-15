@@ -4,12 +4,10 @@ import { ConsumerScope } from './scope/consumer.scope';
 
 @Injectable()
 export class ApisixClient {
-
   constructor(
     private readonly consumerScope: ConsumerScope,
     private readonly routeScope: RouteScope,
-  ) {
-  }
+  ) {}
 
   consumer(): ConsumerScope {
     return this.consumerScope;

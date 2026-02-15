@@ -1,34 +1,62 @@
 {
   "name": "@nestjstools/apache-apisix-client",
   "version": "1.0.0",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "description": "A lightweight, type-safe NestJS client for managing Apache APISIX via the Admin API",
+  "author": "Sebastian Iwanczyszyn",
+  "private": false,
+  "license": "MIT",
+  "main": "lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/nestjstools/apisix-client/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestjstools/apisix-client"
+  },
+  "keywords": [
+    "nestjs-apisix",
+    "apisix-client",
+    "apisix",
+    "nestjstools",
+    "nestjs"
+  ],
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prettier": "node_modules/.bin/prettier --check \"src/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "ci": "npm run prettier && npm run lint && npm run test",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
+    "test": "npm run test:e2e",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/axios": "^4.0.1",
+    "axios": "^1.13.5"
+  },
+  "peerDependencies": {
     "@nestjs/common": "^11.x",
     "@nestjs/core": "^11.x",
-    "@nestjs/platform-express": "^11.x",
-    "axios": "^1.13.5",
-    "reflect-metadata": "^0.x",
-    "rxjs": "^7.x"
+    "rxjs": "^7.x",
+    "@nestjs/axios": "^4.x",
+    "reflect-metadata": "^0.x"
   },
   "devDependencies": {
+    "@nestjs/axios": "^4.0.1",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.18.0",
     "@nestjs/cli": "^11.0.0",

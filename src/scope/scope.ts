@@ -7,8 +7,7 @@ export abstract class Scope {
   protected constructor(
     protected readonly http: HttpService,
     private readonly scopePath: string,
-  ) {
-  }
+  ) {}
 
   protected async request<T>(
     method: 'put' | 'delete' | 'get',
@@ -16,23 +15,21 @@ export abstract class Scope {
     data?: unknown,
   ): Promise<T> {
     const response = await firstValueFrom(
-      this.http.request<T>({
-        method,
-        url: `${this.scopePath}${path.startsWith('/') ? '' : '/'}${path}`,
-        data,
-      }).pipe(
-        catchError((error: AxiosError) => {
-          const status = error.response?.status || 500;
-          const statusText = error.response?.statusText || 'Internal Server Error';
+      this.http
+        .request<T>({
+          method,
+          url: `${this.scopePath}${path.startsWith('/') ? '' : '/'}${path}`,
+          data,
+        })
+        .pipe(
+          catchError((error: AxiosError) => {
+            const status = error.response?.status || 500;
+            const statusText =
+              error.response?.statusText || 'Internal Server Error';
 
-          throw new ClientException(
-            status,
-            statusText,
-            path,
-            error.message,
-          );
-        }),
-      ),
+            throw new ClientException(status, statusText, path, error.message);
+          }),
+        ),
     );
 
     return response.data;
