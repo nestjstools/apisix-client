@@ -1,0 +1,15 @@
+conf:
+  listen:
+    host: 0.0.0.0
+    port: 9000
+
+  etcd:
+    endpoints:
+      - "http://etcd:2379"
+
+  authentication:
+    secret: "change-me-dashboard-secret"
+    expire_time: 3600
+
+  allow_list:
+    - 0.0.0.0/0
