@@ -12,30 +12,12 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
-    services:
-      etcd:
-        image: quay.io/coreos/etcd:v3.5.0
-        env:
-          ALLOW_NONE_AUTHENTICATION: "yes"
-          ETCD_ADVERTISE_CLIENT_URLS: "http://etcd:2379"
-          ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
-        ports:
-          - 2379:2379
-
-      apisix:
-        image: apache/apisix:3.13.0-ubuntu
-        env:
-          APISIX_STAND_ALONE: "false"
-        ports:
-          - 9080:9080
-          - 9180:9180
-          - 9443:9443
-        volumes:
-          - ${{ github.workspace }}/apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Start services
+        run: docker compose up -d
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -46,23 +28,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Wait for APISIX Admin API
-        run: |
-          for i in {1..60}; do
-            if curl -sS http://localhost:9180/apisix/admin/routes -H "X-API-KEY: 123" >/dev/null; then
-              echo "APISIX is up"
-              exit 0
-            fi
-            echo "Waiting for APISIX... ($i)"
-            sleep 2
-          done
-          echo "APISIX did not start in time"
-          docker ps -a || true
-          exit 1
-
       - name: Run CI
         env:
           NODE_ENV: test
-          APISIX_ADMIN_URL: http://localhost:9180
-          APISIX_ADMIN_KEY: "123"
         run: npm run ci
